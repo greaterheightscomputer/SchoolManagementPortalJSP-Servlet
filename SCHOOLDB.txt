@@ -1,0 +1,320 @@
+
+CREATE DATABASE SchportalDB;
+
+USE SchportalDB;
+
+CREATE TABLE Biometric
+(
+	ID int AUTO_INCREMENT PRIMARY KEY,
+	Name varchar(200) NOT NULL,
+	Template1 blob NOT NULL,
+	Template2 blob NOT NULL,
+	Template3 blob NOT NULL
+)AUTO_INCREMENT=1;
+
+CREATE TABLE Sessions
+(
+	cSessionId CHAR(30) PRIMARY KEY,
+	vSessionName VARCHAR(100),
+	vDescription VARCHAR(200),
+	iStatus INT
+);
+
+CREATE TABLE Subjects
+(
+	cSubjectId CHAR(30) PRIMARY KEY,
+	vSubjectName VARCHAR(100),
+	vDescription VARCHAR(200),
+	iStatus INT
+);
+
+CREATE TABLE Terms
+(
+	cTermId CHAR(30) PRIMARY KEY,
+	vTermName VARCHAR(100),
+	iStatus INT
+);
+
+CREATE TABLE Classes
+(
+	cClassId CHAR(30) PRIMARY KEY,
+	vClassName VARCHAR(100),
+	vDescription VARCHAR(200),
+	iStatus INT
+);
+
+CREATE TABLE ClassSubjects
+(
+	iClassSubjectId INT AUTO_INCREMENT PRIMARY KEY,
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cSubjectId CHAR(30) REFERENCES Subjects (cSubjectId),
+	iStatus INT
+)AUTO_INCREMENT=1;
+
+CREATE TABLE Staffs
+(
+	cStaffId CHAR(30) PRIMARY KEY,
+	vSurName VARCHAR(100),
+	vFirstName VARCHAR(100),
+	cGender CHAR(10),
+	dDateOfBirth DATE,
+	vAddress VARCHAR(300),
+	cPhoneNumber CHAR(17),
+	vEmailId VARCHAR(200),
+	vQualification VARCHAR(200),
+	vCategory VARCHAR(100),
+	dDateOfEmployment DATE,
+	mSalary Decimal(10,2),
+	iStatus INT
+);
+
+CREATE TABLE SchoolBill
+(
+	iBillId INT AUTO_INCREMENT PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	vAccountname VARCHAR(50),
+	vAccountno VARCHAR(50),	
+	mPreviousbalance Decimal(10,2),
+	mSchoolfees Decimal(10,2),
+	mUniform Decimal(10,2),
+	mSportlevy Decimal(10,2),
+	mRegistration Decimal(10,2),
+	mExamlevy Decimal(10,2),
+	mPTA Decimal(10,2),
+	mComputerlevy Decimal(10,2),
+	mTextbook Decimal(10,2),	
+	mNotebook Decimal(10,2),
+	mTransport Decimal(10,2),
+	mLessonfees Decimal(10,2),
+	mEndofyearparty Decimal(10,2),
+	mGraduationfees Decimal(10,2),
+	mTotal Decimal(10,2),
+	iStatus INT
+)AUTO_INCREMENT=1;
+
+
+CREATE TABLE Students
+(
+	cStudentId CHAR(30) PRIMARY KEY,
+	vFirstName VARCHAR(100),
+	vLastName VARCHAR(100),
+	vOtherNames VARCHAR(200),
+	cGender CHAR(10),
+	dDateOfBirth DATE,
+	dAdmissionDate DATE,
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	vAddress VARCHAR(300),
+	vParentName VARCHAR(500),
+	vOccupation VARCHAR(200),
+	cPhoneNumber CHAR(17),
+	cMobileNumber CHAR(17),
+	cStaffId CHAR(30) REFERENCES Staffs (cStaffId),
+	vImage VARCHAR(200),
+	iBillId INT REFERENCES SchoolBill(iBillId),
+	iStatus INT
+);
+
+
+CREATE TABLE Exams
+(
+	iExamId INT AUTO_INCREMENT PRIMARY KEY,
+	vExamName VARCHAR(100),
+	iExamQuestion INT,
+	iPassMark INT,
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cSubjectId CHAR(30) REFERENCES Subjects (cSubjectId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	iStatus INT
+)AUTO_INCREMENT=1;
+
+CREATE TABLE ExamQuestions
+(
+	iExamQuestionId INT AUTO_INCREMENT PRIMARY KEY,
+	vExamQuestion VARCHAR(10000),
+	vAnswer01 VARCHAR(10000),
+	vAnswer02 VARCHAR(10000),
+	vAnswer03 VARCHAR(10000),
+	vAnswer04 VARCHAR(10000),
+	vCorrectAnswer VARCHAR(10000),
+	iMark INT,
+	iExamId INT REFERENCES Exams (iExamId),
+	iStatus INT
+)AUTO_INCREMENT=1;
+
+CREATE TABLE ExamScores
+(
+	iExamScoreId INT AUTO_INCREMENT PRIMARY KEY,
+	iExamId INT REFERENCES Exams (iExamId),
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),	
+	vRemark VARCHAR(100),
+	iScore INT,
+	dDate DATETIME,
+	iStatus INT	
+)AUTO_INCREMENT=1;
+
+
+CREATE TABLE Answers
+(
+	iExamQuestionId INT,
+	iExamId INT,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	vExamQuestion VARCHAR(10000),
+	vAnswer VARCHAR(10000)
+);
+
+CREATE TABLE Answers
+(
+	iExamQuestionId INT REFERENCES ExamQuestions (iExamQuestionId),
+	iExamId INT REFERENCES Exams (iExamId),
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	vExamQuestion VARCHAR(10000) REFERENCES ExamQuestions (vExamQuestion),
+	vAnswer VARCHAR(10000)
+);
+
+CREATE TABLE Assessments
+(
+	iAssessmentId INT AUTO_INCREMENT PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	cSubjectId CHAR(30) REFERENCES Subjects (cSubjectId),
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	iTest1 INT,
+	iTest2 INT,
+	iExam INT,
+	iTotal INT,
+	vRemark VARCHAR(100),	
+	cDevelopmentId CHAR(30) REFERENCES Developments (cDevelopmentId),
+	cSportId CHAR(30) REFERENCES Sports (cSportId),
+	cCtimeId CHAR(30) REFERENCES Ctimes (cCtimeId),
+	cCertificateId CHAR(30) REFERENCES Certificates (cCertificateId),
+	cStaffId CHAR(30) REFERENCES Staffs (cStaffId),
+	iStatus INT
+)AUTO_INCREMENT=1;
+
+
+CREATE TABLE Certificates
+(
+	cCertificateId CHAR(30) PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	vDateofAdmission VARCHAR(20),
+	VclassonAdmission VARCHAR(20),
+	vDateofLeaving VARCHAR(20),
+	vClassonLeaving VARCHAR(20),
+	vReasonforLeaving VARCHAR(200),
+	vAward VARCHAR(200),
+	vGrade VARCHAR(200),
+	vSubject1 VARCHAR(50),
+	vSubject2 VARCHAR(50),
+	vSubject3 VARCHAR(50),
+	vSubject4 VARCHAR(50),
+	vSubject5 VARCHAR(50),
+	vSubject6 VARCHAR(50),
+	vSubject7 VARCHAR(50),
+	vSubject8 VARCHAR(50),	
+	vImage VARCHAR(200),	
+	vDate VARCHAR(50),	
+	iStatus INT
+);
+
+CREATE TABLE Developments
+(
+	cDevelopmentId CHAR(30) PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	vHieghtBegin VARCHAR(10),
+	vHieghtEnd VARCHAR(10),
+	vWeightBegin VARCHAR(10),
+	vWeightEnd VARCHAR(10),
+	vDaysAbsent VARCHAR(10),
+	VNature VARCHAR(100),
+	vOrganization VARCHAR(50),
+	vOfficeHeld VARCHAR(80),
+	vContribution VARCHAR(80),
+	vPrincipal VARCHAR(100),
+	vTeacher VARCHAR(100),
+	dVacation DATE,
+	dResumption DATE,
+	iStatus INT
+);
+
+CREATE TABLE Sports
+(
+	cSportId CHAR(30) PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	vEvents VARCHAR(30),
+	vLevelAttained VARCHAR(50),
+	vComments VARCHAR(100),	
+	iStatus INT
+);
+
+CREATE TABLE Ctimes
+(
+	cCtimeId CHAR(30) PRIMARY KEY,
+	cStudentId CHAR(30) REFERENCES Students (cStudentId),
+	cSessionId CHAR(30) REFERENCES Sessions (cSessionId),
+	cClassId CHAR(30) REFERENCES Classes (cClassId),
+	cTermId CHAR(30) REFERENCES Terms (cTermId),
+	vTimePresentinSchool VARCHAR(50),
+	vTimeAbsentinSchool VARCHAR(50),
+	vTimePresentinSport VARCHAR(50),
+	vTimeAbsentinSport VARCHAR(50),
+	vGreenN0 VARCHAR(10),
+	vGreenDeed VARCHAR(100),
+	vRedN0 VARCHAR(10),
+	vRedDeed VARCHAR(100),
+	vComments VARCHAR(50),
+	vCleanlinessRating VARCHAR(20),
+	vRemarks VARCHAR(100),
+	iStatus INT
+);
+
+Create Table AutoId
+(
+	cId Char(10) Primary Key,
+	vTableName Varchar(50),
+	iStatus int
+);
+
+CREATE TABLE Profiles
+(
+	cProfileId CHAR(50) PRIMARY KEY,
+	vProfile VARCHAR(100),
+	iStatus INT
+);
+
+CREATE TABLE Users
+(
+	cUsername CHAR(50) PRIMARY KEY,
+	cPassword CHAR(150) NOT NULL,
+	cStaffId CHAR(30) REFERENCES Staffs (cStaffId),
+	cProfileId CHAR(50) REFERENCES Profiles (cProfileId),
+	iStatus INT
+);
+
+	
+INSERT INTO AutoId VALUES ('ID001','Subjects',1);
+INSERT INTO AutoId VALUES ('ID002','Classes',1);
+INSERT INTO AutoId VALUES ('ID003','Students',1);
+INSERT INTO AutoId VALUES ('ID004','Sessions',1);
+
+
+INSERT INTO Terms VALUES ('Term01','First Term',0);
+INSERT INTO Terms VALUES ('Term02','Second Term',0);
+INSERT INTO Terms VALUES ('Term03','Third Term',0);
+
+INSERT INTO Profiles VALUES ('UP0001','Administrator',0);
+INSERT INTO Profiles VALUES ('UP0002','Teacher',0);
+
+

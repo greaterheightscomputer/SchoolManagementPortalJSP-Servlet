@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Regform" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="555"/>
+	<style name="Title" isDefault="false" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" isDefault="false" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" isDefault="false" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" isDefault="false" fontName="Arial" fontSize="12"/>
+	<style name="Row" isDefault="false" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style isDefault="false" style="Row" backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="studentId" class="java.lang.String"/>
+	<parameter name="sessionId" class="java.lang.String"/>
+	<parameter name="classId" class="java.lang.String"/>
+	<parameter name="termId" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     students.`cStudentId` AS students_cStudentId,
+     students.`vFirstName` AS students_vFirstName,
+     students.`vLastName` AS students_vLastName,
+     students.`vOtherNames` AS students_vOtherNames,
+     students.`cGender` AS students_cGender,
+     students.`dDateOfBirth` AS students_dDateOfBirth,
+     students.`dAdmissionDate` AS students_dAdmissionDate,
+     sessions.`vSessionName` AS sessions_vSessionName,
+     classes.`vClassName` AS classes_vClassName,
+     terms.`vTermName` AS terms_vTermName,
+     students.`vAddress` AS students_vAddress,
+     students.`vParentName` AS students_vParentName,
+     students.`vOccupation` AS students_vOccupation,
+     students.`cMobileNumber` AS students_cMobileNumber,
+     students.`vImage` AS students_vImage
+FROM
+     `students` students INNER JOIN
+     `sessions` sessions ON students.cSessionId = sessions.cSessionId INNER JOIN
+     `classes` classes ON students.cClassId = classes.cClassId INNER JOIN
+     `terms` terms ON students.cTermId = terms.cTermId WHERE students.cStudentId=$P{studentId}AND students.cSessionId=$P{sessionId}AND students.cClassId=$P{classId}AND students.cTermId=$P{termId}]]>
+	</queryString>
+	<field name="students_cStudentId" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vFirstName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vLastName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vOtherNames" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_cGender" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_dDateOfBirth" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_dAdmissionDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sessions_vSessionName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="classes_vClassName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="terms_vTermName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vAddress" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vParentName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vOccupation" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_cMobileNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vImage" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="164" height="126"/>
+				<imageExpression class="java.lang.String"><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="170" y="9" width="263" height="62"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Sch Portal]]></text>
+			</staticText>
+			<image>
+				<reportElement x="433" y="-115" width="267" height="209"/>
+				<imageExpression class="java.lang.String"><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="SubTitle" x="154" y="71" width="287" height="22" forecolor="#0000CC"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Student Registration Form]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnFooter>
+		<band height="625" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="135" height="625" backcolor="#0033FF"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement style="Detail" x="432" y="4" width="120" height="156"/>
+				<imageExpression class="java.lang.String"><![CDATA["..\\pictures\\"+$F{students_vImage}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Column header" x="40" y="490" width="97" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Mobile Number:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="135" y="490" width="169" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_cMobileNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="64" y="454" width="74" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Occupation:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="136" y="454" width="158" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vOccupation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="54" y="418" width="84" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Parent Name:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="137" y="418" width="206" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vParentName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="138" y="15" width="136" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_cStudentId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="67" y="51" width="74" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[First Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="71" y="15" width="67" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Student Id:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="67" y="88" width="71" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Last Name:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="138" y="88" width="204" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vLastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="53" y="127" width="90" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Other Names:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="138" y="127" width="205" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vOtherNames}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="86" y="164" width="50" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="137" y="164" width="152" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_cGender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="37" y="234" width="101" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Admission Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="46" y="272" width="90" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Session Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="60" y="308" width="74" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Class Name:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="138" y="200" width="152" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{students_dDateOfBirth}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="136" y="272" width="169" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sessions_vSessionName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="57" y="200" width="90" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Date of Birth:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="137" y="234" width="169" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{students_dAdmissionDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="136" y="308" width="169" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{classes_vClassName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="81" y="382" width="55" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="61" y="345" width="74" height="15" forecolor="#FFFFFF"/>
+				<textElement/>
+				<text><![CDATA[Term Name:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="136" y="345" width="141" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{terms_vTermName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="136" y="382" width="416" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vAddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="138" y="51" width="205" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vFirstName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

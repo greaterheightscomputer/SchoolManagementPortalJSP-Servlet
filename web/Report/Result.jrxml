@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Result" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="299"/>
+	<style name="Title" isDefault="false" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" isDefault="false" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" isDefault="false" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" isDefault="false" fontName="Arial" fontSize="12"/>
+	<style name="Row" isDefault="false" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style isDefault="false" style="Row" backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="studentId" class="java.lang.String"/>
+	<parameter name="sessionId" class="java.lang.String"/>
+	<parameter name="classId" class="java.lang.String"/>
+	<parameter name="termId" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     assessments.`iTest1` AS assessments_iTest1,
+     assessments.`iTest2` AS assessments_iTest2,
+     assessments.`iExam` AS assessments_iExam,
+     assessments.`iTotal` AS assessments_iTotal,
+     assessments.`vRemark` AS assessments_vRemark,
+     students.`cStudentId` AS students_cStudentId,
+     concat(students.vFirstName, ' ' ,students.vLastName, ' ', students.vOtherNames) AS students_vFirstName,
+     students.`cGender` AS students_cGender,
+     students.`dDateOfBirth` AS students_dDateOfBirth,
+     students.`dAdmissionDate` AS students_dAdmissionDate,
+     students.`vParentName` AS students_vParentName,
+     classes.`vClassName` AS classes_vClassName,
+     classes.`vDescription` AS classes_vDescription,
+     terms.`vTermName` AS terms_vTermName,
+     subjects.`vSubjectName` AS subjects_vSubjectName,
+     sessions.`vSessionName` AS sessions_vSessionName,
+     sports.`vEvents` AS sports_vEvents,
+     sports.`vLevelAttained` AS sports_vLevelAttained,
+     sports.`vComments` AS sports_vComments,
+     developments.`vHieghtBegin` AS developments_vHieghtBegin,
+     developments.`vHieghtEnd` AS developments_vHieghtEnd,
+     developments.`vWeightBegin` AS developments_vWeightBegin,
+     developments.`vWeightEnd` AS developments_vWeightEnd,
+     developments.`vDaysAbsent` AS developments_vDaysAbsent,
+     developments.`VNature` AS developments_VNature,
+     developments.`vOrganization` AS developments_vOrganization,
+     developments.`vOfficeHeld` AS developments_vOfficeHeld,
+     developments.`vContribution` AS developments_vContribution,
+     developments.`vPrincipal` AS developments_vPrincipal,
+     developments.`vTeacher` AS developments_vTeacher,
+     developments.`dVacation` AS developments_dVacation,
+     developments.`dResumption` AS developments_dResumption,
+     ctimes.`vTimePresentinSchool` AS ctimes_vTimePresentinSchool,
+     ctimes.`vTimeAbsentinSchool` AS ctimes_vTimeAbsentinSchool,
+     ctimes.`vTimePresentinSport` AS ctimes_vTimePresentinSport,
+     ctimes.`vTimeAbsentinSport` AS ctimes_vTimeAbsentinSport,
+     ctimes.`vGreenN0` AS ctimes_vGreenN0,
+     ctimes.`vGreenDeed` AS ctimes_vGreenDeed,
+     ctimes.`vRedN0` AS ctimes_vRedN0,
+     ctimes.`vRedDeed` AS ctimes_vRedDeed,
+     ctimes.`vComments` AS ctimes_vComments,
+     ctimes.`vCleanlinessRating` AS ctimes_vCleanlinessRating,
+     ctimes.`vRemarks` AS ctimes_vRemarks
+FROM
+     `assessments` assessments INNER JOIN
+     `students` students ON assessments.cStudentId = students.cStudentId INNER JOIN
+     `classes` classes ON assessments.cClassId = classes.cClassId INNER JOIN
+     `ctimes` ctimes ON assessments.cCtimeId = ctimes.cCtimeId INNER JOIN
+     `developments` developments ON assessments.cDevelopmentId = developments.cDevelopmentId INNER JOIN
+     `sessions` sessions ON assessments.cSessionId = sessions.cSessionId INNER JOIN
+     `sports` sports ON assessments.cSportId = sports.cSportId INNER JOIN
+     `subjects` subjects ON assessments.cSubjectId = subjects.cSubjectId INNER JOIN
+     `terms` terms ON assessments.cTermId = terms.cTermId WHERE assessments.cStudentId=$P{studentId}AND assessments.cSessionId=$P{sessionId}AND assessments.cClassId=$P{classId}AND assessments.cTermId=$P{termId}]]>
+	</queryString>
+	<field name="assessments_iTest1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="assessments_iTest2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="assessments_iExam" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="assessments_iTotal" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="assessments_vRemark" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_cStudentId" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vFirstName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_cGender" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_dDateOfBirth" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_dAdmissionDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="students_vParentName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="classes_vClassName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="classes_vDescription" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="terms_vTermName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subjects_vSubjectName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sessions_vSessionName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sports_vEvents" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sports_vLevelAttained" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sports_vComments" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vHieghtBegin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vHieghtEnd" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vWeightBegin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vWeightEnd" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vDaysAbsent" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_VNature" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vOrganization" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vOfficeHeld" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vContribution" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vPrincipal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_vTeacher" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_dVacation" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="developments_dResumption" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vTimePresentinSchool" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vTimeAbsentinSchool" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vTimePresentinSport" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vTimeAbsentinSport" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vGreenN0" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vGreenDeed" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vRedN0" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vRedDeed" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vComments" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vCleanlinessRating" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctimes_vRemarks" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="160" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="164" height="126"/>
+				<imageExpression class="java.lang.String"><![CDATA["coffee.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="170" y="0" width="263" height="51"/>
+				<textElement verticalAlignment="Middle">
+					<font size="40" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Schportal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="170" y="48" width="196" height="22"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Result Sheet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="251" y="68" width="60" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Student Id:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="433" y="-115" width="267" height="209"/>
+				<imageExpression class="java.lang.String"><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="310" y="68" width="132" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_cStudentId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="288" y="83" width="240" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vFirstName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="448" y="68" width="48" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="492" y="68" width="63" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_cGender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="252" y="83" width="36" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="252" y="99" width="72" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Date of Birth:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="324" y="99" width="120" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{students_dDateOfBirth}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="252" y="114" width="96" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Admission Date:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="339" y="114" width="103" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{students_dAdmissionDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="252" y="128" width="36" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Class:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="288" y="128" width="63" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{classes_vClassName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="352" y="128" width="72" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[N0. in Class:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="420" y="128" width="55" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{classes_vDescription}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="451" y="99" width="35" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Term:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="482" y="99" width="67" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{terms_vTermName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="451" y="114" width="46" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Session:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="497" y="114" width="58" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sessions_vSessionName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="497" y="114" width="58" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sessions_vSessionName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="251" y="82" width="301" height="1"/>
+			</line>
+			<line>
+				<reportElement x="251" y="98" width="301" height="1"/>
+			</line>
+			<line>
+				<reportElement x="251" y="113" width="301" height="1"/>
+			</line>
+			<line>
+				<reportElement x="251" y="128" width="301" height="1"/>
+			</line>
+			<line>
+				<reportElement x="251" y="142" width="301" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="182" y="144" width="160" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[PERFORMANCE SUBJECTS]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="159" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="1" width="159" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Subjects]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="202" y="1" width="47" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[1st Test ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="266" y="1" width="49" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[2nd Test]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="334" y="1" width="67" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Exam Score]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="420" y="1" width="36" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="480" y="1" width="48" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Remark]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="16" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="202" y="0" width="47" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{assessments_iTest1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="266" y="0" width="49" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{assessments_iTest2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="334" y="0" width="67" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{assessments_iExam}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="420" y="0" width="36" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{assessments_iTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="480" y="0" width="48" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{assessments_vRemark}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="0" y="0" width="159" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subjects_vSubjectName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="320" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="16" width="550" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="Column header" x="5" y="16" width="51" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Events]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="82" y="17" width="254" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sports_vEvents}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="3" y="31" width="79" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Level Attained]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="82" y="30" width="179" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sports_vLevelAttained}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="382" y="16" width="62" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Comments]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="266" y="31" width="284" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sports_vComments}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="237" y="2" width="60" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[SPORTS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="30" width="550" height="1"/>
+			</line>
+			<line>
+				<reportElement x="79" y="16" width="1" height="30"/>
+			</line>
+			<line>
+				<reportElement x="54" y="121" width="1" height="32"/>
+			</line>
+			<line>
+				<reportElement x="4" y="121" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="256" y="153" width="1" height="17"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="58" y="137" width="135" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vGreenDeed}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="143" y="92" width="248" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[CONDUCT (Honesty, Cleanliness, Loyalty, etc)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="25" y="91" width="515" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="209" y="155" width="45" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Remarks]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="443" y="76" width="96" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vTimeAbsentinSport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="6" y="154" width="105" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Cleanliness Rating]]></text>
+			</staticText>
+			<line>
+				<reportElement x="278" y="60" width="1" height="31"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="442" y="61" width="98" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vTimeAbsentinSchool}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="281" y="76" width="161" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. of Time Absent in Sport]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="154" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="246" y="121" width="1" height="32"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="191" y="61" width="87" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vTimePresentinSchool}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="262" y="154" width="290" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vRemarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="185" y="47" width="181" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[REGULARITY & PUNCTUALITY]]></text>
+			</staticText>
+			<line>
+				<reportElement x="194" y="107" width="1" height="46"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="28" y="76" width="160" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. of Time Present in Sport]]></text>
+			</staticText>
+			<line>
+				<reportElement x="437" y="60" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="7" y="121" width="37" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[N0.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="204" y="153" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="25" y="60" width="515" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="250" y="121" width="89" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Deed]]></text>
+			</staticText>
+			<line>
+				<reportElement x="551" y="107" width="1" height="63"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="281" y="61" width="161" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. of Time Absent in School]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="382" y="121" width="68" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Comments]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="170" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="339" y="121" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="28" y="61" width="160" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. of Time Present in School]]></text>
+			</staticText>
+			<line>
+				<reportElement x="539" y="60" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="7" y="107" width="169" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Green for Exemplary conduct]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="191" y="76" width="87" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vTimePresentinSport}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="5" y="136" width="546" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="250" y="138" width="89" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vRedDeed}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="341" y="138" width="210" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vComments}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="109" y="154" width="93" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vCleanlinessRating}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="100" y="121" width="43" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Deed]]></text>
+			</staticText>
+			<line>
+				<reportElement x="25" y="61" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="208" y="121" width="28" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[N0.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="6" y="137" width="47" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vGreenN0}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="26" y="76" width="514" height="1"/>
+			</line>
+			<line>
+				<reportElement x="4" y="153" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="188" y="60" width="1" height="31"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="196" y="138" width="50" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ctimes_vRedN0}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="106" y="153" width="1" height="18"/>
+			</line>
+			<line>
+				<reportElement x="4" y="106" width="548" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="196" y="107" width="121" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Red for Bad conduct]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="107" width="1" height="47"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="225" y="185" width="59" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[WEIGHT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="337" y="186" width="103" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[No. of days absent ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="337" y="217" width="102" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vDaysAbsent}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="184" width="548" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="73" y="185" width="57" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[HEIGHT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="551" y="184" width="1" height="47"/>
+			</line>
+			<line>
+				<reportElement x="4" y="199" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="3" y="184" width="1" height="48"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="99" y="217" width="63" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vHieghtEnd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="337" y="201" width="102" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[due to illness]]></text>
+			</staticText>
+			<line>
+				<reportElement x="332" y="184" width="1" height="47"/>
+			</line>
+			<line>
+				<reportElement x="97" y="200" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="266" y="201" width="63" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[End of Term]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="168" y="171" width="210" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[PHYSICAL DEVELOPMENT & HEALTH]]></text>
+			</staticText>
+			<line>
+				<reportElement x="166" y="184" width="1" height="47"/>
+			</line>
+			<line>
+				<reportElement x="4" y="215" width="547" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="445" y="217" width="110" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_VNature}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="231" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="263" y="200" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="99" y="201" width="63" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[End of Term]]></text>
+			</staticText>
+			<line>
+				<reportElement x="441" y="200" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="445" y="201" width="107" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Nature of Illness]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="266" y="217" width="63" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vWeightEnd}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="170" y="217" width="91" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vWeightBegin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="5" y="201" width="91" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Beginning of Term]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="170" y="201" width="91" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Beginning of Term]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="5" y="217" width="91" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vHieghtBegin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="38" y="244" width="74" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Organization]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="174" y="231" width="210" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[CLUBS, YOUTH ORGANIGATIONS ETC]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="243" width="1" height="32"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="281" y="260" width="271" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vContribution}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="259" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="4" y="243" width="548" height="1"/>
+			</line>
+			<line>
+				<reportElement x="140" y="244" width="1" height="31"/>
+			</line>
+			<line>
+				<reportElement x="551" y="243" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="363" y="244" width="145" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Significant Contribution]]></text>
+			</staticText>
+			<line>
+				<reportElement x="278" y="244" width="1" height="31"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="183" y="244" width="81" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Office Held]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="5" y="259" width="134" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vOrganization}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="142" y="259" width="134" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vOfficeHeld}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="289" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="1" y="274" width="115" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Teacher's Comments:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="274" width="549" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="116" y="274" width="439" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vTeacher}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="1" y="290" width="120" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Principal's Comments:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="118" y="290" width="435" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{developments_vPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="267" y="304" width="99" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{developments_dVacation}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="318" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="458" y="304" width="101" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{developments_dResumption}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="191" y="304" width="82" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Vacation Date:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="304" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="83" y="304" width="109" height="15"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{students_vParentName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="366" y="304" width="105" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Resumption Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="2" y="304" width="90" height="15" forecolor="#736343"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Parent's Name:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="262" y="30" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="337" y="16" width="1" height="14"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

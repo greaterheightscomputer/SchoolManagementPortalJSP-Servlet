@@ -1,0 +1,49 @@
+
+html
+{
+    background-color:#FAFDFE;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-size:12px;
+    border:4px;
+}
+
+select, input,textarea
+{
+    font-family:calibri, verdana, Helevitica;
+    border: 1px solid #666666;
+}
+a
+{
+    text-decoration:none;
+}
+a.hover
+{
+    text-decoration:underline;
+}
+.pageHeader
+{
+    width:1000px;
+    padding:2pt 5pt;
+}
+.left
+{
+    float:left;
+    width:250px;
+    background-color:#C8E8F3;
+    padding:5px;
+}
+
+.right
+{
+    float:right;
+    width:700px;
+    background-color:#C8E8F3;
+    padding:5px 10px;
+}
+.content
+{
+    text-align:center;
+    width:600px;
+    background-color:#C8E8F3;
+    padding:5px 10px;
+}
